@@ -4,6 +4,11 @@ class VideosController < ApplicationController
   end
 
   def youtube_callback
-    render plain: params['hub.challenge']
+    if params['hub.challenge']
+      render plain: params['hub.challenge']
+    else
+      puts 'New Video'
+      puts params
+    end
   end
 end
