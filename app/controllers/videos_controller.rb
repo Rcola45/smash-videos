@@ -4,6 +4,7 @@ class VideosController < ApplicationController
   end
 
   def youtube_collection
+    puts params
     render json: { status: 200 }
   end
 end
