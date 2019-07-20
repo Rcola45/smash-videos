@@ -4,7 +4,6 @@ class VideosController < ApplicationController
   end
 
   def youtube_callback
-    puts params
-    render json: { status: 200 }
+    render json: { status: 200, body: params['hub.challenge'] }
   end
 end
