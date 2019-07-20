@@ -3,7 +3,7 @@ class VideosController < ApplicationController
     @text = 'Main Video Page'
   end
 
-  def youtube_collection
+  def youtube_callback
     puts params
     render json: { status: 200 }
   end
