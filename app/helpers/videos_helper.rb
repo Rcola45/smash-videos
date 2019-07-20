@@ -1,2 +1,2 @@
-module VideoHelper
+module VideosHelper
 end
