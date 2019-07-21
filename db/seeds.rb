@@ -14,4 +14,5 @@ Video.find_or_create_by(title: 'WNF 2.7 YMCA (Donkey Kong) vs Paper (Mr. Game an
                         url: 'https://www.youtube.com/watch?v=R1jzLWZ_1ZM',
                         upload_date: 'Jun 22, 2019'.to_date,
                         view_count: 1876,
+                        video_id: 'R1jzLWZ_1ZM',
                         source: source)
