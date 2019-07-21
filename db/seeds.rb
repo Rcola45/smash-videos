@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-source = Source.find_or_create_by(name: '2GGaming', url: 'https://www.youtube.com/channel/UClIuCiBN-UIsTZb0WlhRo0Q')
+Source.find_or_create_by(name: 'VGBootCamp', url: 'https://www.youtube.com/channel/UCj1J3QuIftjOq9iv_rr7Egw', channel_id: 'UCj1J3QuIftjOq9iv_rr7Egw')
+
+source = Source.find_or_create_by(name: '2GGaming', url: 'https://www.youtube.com/channel/UClIuCiBN-UIsTZb0WlhRo0Q', channel_id: 'UClIuCiBN-UIsTZb0WlhRo0Q')
+
 Video.find_or_create_by(title: 'WNF 2.7 YMCA (Donkey Kong) vs Paper (Mr. Game and Watch) - Losers Quarters - Smash Ultimate',
                         url: 'https://www.youtube.com/watch?v=R1jzLWZ_1ZM',
                         upload_date: 'Jun 22, 2019'.to_date,
