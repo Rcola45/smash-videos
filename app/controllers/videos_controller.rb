@@ -1,4 +1,6 @@
 class VideosController < ApplicationController
+  protect_from_forgery except: [:youtube_callback]
+
   def index
     @text = 'Main Video Page'
   end
