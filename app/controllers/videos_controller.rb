@@ -9,6 +9,7 @@ class VideosController < ApplicationController
     else
       puts 'New Video'
       puts params
+      puts request.body
     end
   end
 end
