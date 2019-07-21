@@ -11,7 +11,7 @@ class VideosController < ApplicationController
     else
       puts 'New Video'
       puts params
-      puts request.body
+      puts request.body.read
     end
   end
 end
