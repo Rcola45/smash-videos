@@ -8,7 +8,11 @@ class VideosController < ApplicationController
   def youtube_callback
     if params['hub.challenge']
       # For subscribing to video
-      render plain: params['hub.challenge']
+      if params['hub.mode'].in? ['subscribe', 'unsubscribe']
+        handle_subscription
+      else
+        puts "Unknown mode: #{params['hub.mode']}"
+      end
     else
       # See example rss here: https://developers.google.com/youtube/v3/guides/push_notifications
       raw_body = request.body.read
@@ -16,9 +20,9 @@ class VideosController < ApplicationController
       if rss
         parse_xml_videos rss
       else
-        puts 'No video info found in xml'
+        puts 'Could not parse rss feed'
       end
-      head 204, content_type: "text/html"
+      head 204, content_type: 'text/html'
     end
   end
 
@@ -39,6 +43,17 @@ class VideosController < ApplicationController
       else
         puts "Source not found for channel id <#{video[:channel_id]}>"
       end
+    end
+  end
+
+  def handle_subscription
+    channel_id = params['hub.topic'].split('?')[1].split('=')[1]
+    if Source.find_by(channel_id: channel_id)
+      puts "#{params['hub.mode']}ing with channel id <#{channel_id}>"
+      render plain: params['hub.challenge']
+    else
+      puts "Channel with id <#{channel_id}> is not in the database currently"
+      head 204, content_type: 'text/html'
     end
   end
 
