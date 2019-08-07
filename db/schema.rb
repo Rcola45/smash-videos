@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_123342) do
+ActiveRecord::Schema.define(version: 2019_07_24_004105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aliases", force: :cascade do |t|
+    t.string "alt"
+    t.string "object_type"
+    t.bigint "object_id"
+  end
 
   create_table "sources", force: :cascade do |t|
     t.string "name", null: false

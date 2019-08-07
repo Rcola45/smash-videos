@@ -30,18 +30,19 @@ class VideosController < ApplicationController
 
   def parse_xml_videos(rss)
     rss.entries.each do |rss_entry|
-      video = extract_video_elements(rss_entry)
-      source = Source.find_by(channel_id: video[:channel_id])
+      video_elements = extract_video_elements(rss_entry)
+      source = Source.find_by(channel_id: video_elements[:channel_id])
       if source
-        Video.find_or_create_by(video_id: video[:video_id]) do |v|
-          v.title = video[:title]
-          v.url = video[:url]
-          v.upload_date = video[:upload_date]
+        video = Video.find_or_create_by(video_id: video_elements[:video_id]) do |v|
+          v.title = video_elements[:title]
+          v.url = video_elements[:url]
+          v.upload_date = video_elements[:upload_date]
           v.source = source
           v.view_count = 0
         end
+        extract_video_info(video)
       else
-        puts "Source not found for channel id <#{video[:channel_id]}>"
+        puts "Source not found for channel id <#{video_elements[:channel_id]}>"
       end
     end
   end
@@ -67,4 +68,19 @@ class VideosController < ApplicationController
     # elements[:description] = video.content
     elements
   end
+end
+
+def print_matches reg, str='Smash Ultimate Tournament - ZD [L] (Fox) Vs. Puppeh (PT, ROB) - The Grind 85 SSBU Grand Finals'
+  matches = str.match(reg)
+  puts matches
+end
+
+def print_matches2 reg, str='WNF 2.11 Elegant (Luigi) vs Sparg0 (Cloud) - Grand Finals - Smash Ultimate'
+  matches = str.match(reg)
+  puts matches
+end
+
+def print_matches3 reg, str='HAT 74 - ABYSS | Nightshade (Captain Falcon) vs TCM | $ergio (Cloud) - Grand Finals - Smash Ultimate'
+  matches = str.match(reg)
+  puts matches
 end

@@ -9,6 +9,7 @@
 Source.find_or_create_by(name: 'VGBootCamp', url: 'https://www.youtube.com/channel/UCj1J3QuIftjOq9iv_rr7Egw', channel_id: 'UCj1J3QuIftjOq9iv_rr7Egw')
 
 source = Source.find_or_create_by(name: '2GGaming', url: 'https://www.youtube.com/channel/UClIuCiBN-UIsTZb0WlhRo0Q', channel_id: 'UClIuCiBN-UIsTZb0WlhRo0Q')
+# Regex for 2GGaming(incomplete): /(?<tournament>(\w*\s\d+(\.\d+)?\s-?|^(.*?)-))(?<player_one>[^(]+)\((?<player_one_characters>[^)]+)\)\s+(?<vs>(Vs\.?|versus))\s+(?<player_two>[^(]+)\((?<player_two_characters>[^)]+)\)(?<tournament_info>.*$)/i 
 
 Video.find_or_create_by(title: 'WNF 2.7 YMCA (Donkey Kong) vs Paper (Mr. Game and Watch) - Losers Quarters - Smash Ultimate',
                         url: 'https://www.youtube.com/watch?v=R1jzLWZ_1ZM',
