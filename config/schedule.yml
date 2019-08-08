@@ -1,0 +1,5 @@
+subscribe_to_channels_job:
+  cron: "0 0 * * 0"
+  class: "SubscribeToChannelsJob"
+  queue: 'video_collection'
+  active_job: true

@@ -1,0 +1,5 @@
+---
+:logfile: ./log/sidekiq.log
+:concurrency: 4
+:queues:
+  - [video_collection, 1]
