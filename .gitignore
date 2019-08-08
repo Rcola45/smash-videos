@@ -28,3 +28,6 @@
 
 # Ignore env file
 .env
+
+# Redis dump file
+dump.rdb
