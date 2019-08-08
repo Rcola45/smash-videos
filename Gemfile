@@ -16,8 +16,10 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-# Sidekiq/Redis
+# Sidekiq
 gem 'sidekiq'
+# Scheduling Sidekiq Jobs
+gem 'sidekiq-cron'
 
 # Slim lang
 gem 'slim-rails'
