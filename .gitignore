@@ -31,3 +31,6 @@
 
 # Redis dump file
 dump.rdb
+
+# My Shit
+logs.txt

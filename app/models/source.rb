@@ -1,5 +1,6 @@
 class Source < ApplicationRecord
   has_many :videos
+  has_many :title_regexes
 
   scope :active, -> { where collection_active: true }
 

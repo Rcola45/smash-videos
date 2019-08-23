@@ -40,7 +40,6 @@ class VideosController < ApplicationController
           v.source = source
           v.view_count = 0
         end
-        extract_video_info(video)
       else
         puts "Source not found for channel id <#{video_elements[:channel_id]}>"
       end
@@ -68,19 +67,4 @@ class VideosController < ApplicationController
     # elements[:description] = video.content
     elements
   end
-end
-
-def print_matches reg, str='Smash Ultimate Tournament - ZD [L] (Fox) Vs. Puppeh (PT, ROB) - The Grind 85 SSBU Grand Finals'
-  matches = str.match(reg)
-  puts matches
-end
-
-def print_matches2 reg, str='WNF 2.11 Elegant (Luigi) vs Sparg0 (Cloud) - Grand Finals - Smash Ultimate'
-  matches = str.match(reg)
-  puts matches
-end
-
-def print_matches3 reg, str='HAT 74 - ABYSS | Nightshade (Captain Falcon) vs TCM | $ergio (Cloud) - Grand Finals - Smash Ultimate'
-  matches = str.match(reg)
-  puts matches
 end
