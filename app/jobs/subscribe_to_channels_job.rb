@@ -3,14 +3,14 @@ require 'net/http'
 class SubscribeToChannelsJob < ApplicationJob
   def perform
     Source.active.each do |source|
-      subscribe source.feed_channel_url
+      subscribe source.feed_url
     end
   end
 
-  def subscribe(feed_channel_url)
+  def subscribe(feed_url)
     params = {
       'hub.mode': 'subscribe',
-      'hub.topic': feed_channel_url,
+      'hub.topic': feed_url,
       'hub.callback': 'https://smash-videos.herokuapp.com/youtube_callback',
       'hub.lease_seconds': '2592000'
     }
@@ -18,7 +18,7 @@ class SubscribeToChannelsJob < ApplicationJob
     subscription_hub_url = 'https://pubsubhubbub.appspot.com/subscribe'
     request = Net::HTTP.post_form(URI.parse(subscription_hub_url), params)
     if request.code == '202'
-      puts "Successfully subscribed to channel #{feed_channel_url}"
+      puts "Successfully subscribed to channel #{feed_url}"
     else
       puts "Bad SubscriptionRequest: #{request.body}"
     end

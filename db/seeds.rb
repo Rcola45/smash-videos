@@ -7,10 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #######################
+singles = MatchType.find_or_create_by(name: 'Singles')
 # Creating Sources
-Source.find_or_create_by(name: 'VGBootCamp', url: 'https://www.youtube.com/channel/UCj1J3QuIftjOq9iv_rr7Egw', channel_id: 'UCj1J3QuIftjOq9iv_rr7Egw')
-
+vg = Source.find_or_create_by(name: 'VGBootCamp', url: 'https://www.youtube.com/channel/UCj1J3QuIftjOq9iv_rr7Egw', channel_id: 'UCj1J3QuIftjOq9iv_rr7Egw')
 source = Source.find_or_create_by(name: '2GGaming', url: 'https://www.youtube.com/channel/UClIuCiBN-UIsTZb0WlhRo0Q', channel_id: 'UClIuCiBN-UIsTZb0WlhRo0Q')
+
 # Regex for 2GGaming(incomplete): /(?<tournament>(\w*\s\d+(\.\d+)?\s-?|^(.*?)-))(?<player_1>[^(]+)\((?<player_1_characters>[^)]+)\)\s+(?<vs>(Vs\.?|versus))\s+(?<player_2>[^(]+)\((?<player_2_characters>[^)]+)\)(?<tournament_info>.*$)/i 
 
 Video.find_or_create_by(title: 'WNF 2.7 YMCA (Donkey Kong) vs Paper (Mr. Game and Watch) - Losers Quarters - Smash Ultimate',
@@ -20,6 +21,19 @@ Video.find_or_create_by(title: 'WNF 2.7 YMCA (Donkey Kong) vs Paper (Mr. Game an
                         video_id: 'R1jzLWZ_1ZM',
                         source: source)
 
+Video.find_or_create_by(title: 'WNF 1.9 Mr E (Lucina) vs SweetT (Joker) - Grand Finals - Smash Ultimate',
+                        url: 'https://www.youtube.com/watch?v=_AcO0dtIhQI',
+                        upload_date: 'April 18, 2019'.to_date,
+                        view_count: 965349,
+                        video_id: '_AcO0dtIhQI',
+                        source: source)
+
+Video.find_or_create_by(title: 'Standoff 2019 - NVR | Elegant (Luigi) Vs. YellowRello (Yoshi) Smash Ultimate Tournament Winners 4',
+                        url: 'https://www.youtube.com/watch?v=Vek-2ifrZ08',
+                        upload_date: 'September 1, 2019'.to_date,
+                        view_count: 4054,
+                        video_id: 'Vek-2ifrZ08',
+                        source: vg)
 #######################
 # Create the Games
 puts 'Creating Games...'
@@ -122,3 +136,5 @@ character_names.each do |character_name|
 end
 
 puts 'Finished creating Characters.'
+
+TitleRegex.find_or_create_by(regex_string: '(?<tournament>(\w*\s\d+(\.\d+)?\s-?|^(.*?)-))(?<player_1>[^(]+)\((?<player_1_characters>[^)]+)\)\s+(?<vs>(Vs\.?|versus))\s+(?<player_2>[^(]+)\((?<player_2_characters>[^)]+)\)(?<tournament_info>.*$)', source: vg, match_type: singles, game: ssbu)

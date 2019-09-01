@@ -3,7 +3,7 @@ class Video < ApplicationRecord
   has_one :match
   has_one :match_type, through: :match
 
-  scope :ssbu, -> { where('lower(title) LIKE ? OR lower(title) LIKE ?', '%smash ultimate%', '%ssbu') } #All SSBU videos
+  scope :ssbu, -> { where('lower(title) LIKE ? OR lower(title) LIKE ? OR lower(title) LIKE ?', '%smash ultimate%', '%ssbu%', '%bros ultimate%') } #All SSBU videos
 
   def parse_title
     unless match
