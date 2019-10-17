@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_31_193458) do
+ActiveRecord::Schema.define(version: 2019_10_17_013138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 2019_08_31_193458) do
   create_table "characters_match_players", id: false, force: :cascade do |t|
     t.bigint "match_player_id", null: false
     t.bigint "character_id", null: false
+    t.index ["match_player_id", "character_id"], name: "index_unique_character_id_and_match_player_id", unique: true
+  end
+
+  create_table "descriptions", force: :cascade do |t|
+    t.text "value"
+    t.bigint "video_id"
+    t.index ["video_id"], name: "index_descriptions_on_video_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -75,6 +82,7 @@ ActiveRecord::Schema.define(version: 2019_08_31_193458) do
     t.string "url"
     t.string "channel_id"
     t.boolean "collection_active", default: true
+    t.datetime "last_collected"
   end
 
   create_table "title_regexes", force: :cascade do |t|
@@ -93,14 +101,15 @@ ActiveRecord::Schema.define(version: 2019_08_31_193458) do
 
   create_table "videos", force: :cascade do |t|
     t.string "title", null: false
-    t.string "url", null: false
-    t.date "upload_date"
+    t.string "url"
+    t.datetime "upload_date"
     t.bigint "view_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "source_id"
     t.string "video_id", null: false
     t.index ["source_id"], name: "index_videos_on_source_id"
+    t.index ["video_id"], name: "index_videos_on_video_id"
   end
 
   add_foreign_key "matches", "tournaments"

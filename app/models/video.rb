@@ -1,9 +1,26 @@
 class Video < ApplicationRecord
   belongs_to :source
+  has_one :description, dependent: :destroy
   has_one :match
   has_one :match_type, through: :match
 
   scope :ssbu, -> { where('lower(title) LIKE ? OR lower(title) LIKE ? OR lower(title) LIKE ?', '%smash ultimate%', '%ssbu%', '%bros ultimate%') } #All SSBU videos
+
+  def url
+    read_attribute(:url) || "https://www.youtube.com/watch?v=#{video_id}"
+  end
+
+  def embedded_url
+    "https://www.youtube.com/embed/#{video_id}"
+  end
+
+  def share_url
+    "https://youtu.be/#{video_id}"
+  end
+
+  def iframe
+    "<iframe width='560' height='315' src='#{embedded_url}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"
+  end
 
   def parse_title
     unless match
@@ -16,21 +33,6 @@ class Video < ApplicationRecord
       puts "Could not find matching title regex\ns:#{source.id}\nmt: #{match_type.id}"
       return
     end
-    parsed_title = regex.parse(title)
-    if parsed_title.nil?
-      puts "Could not parse title with given regex\nv: #{self.id}\ntr: #{regex.id}"
-      return
-    end
-    (1..match_type.player_count).each do |i|
-      player_name = parsed_title["player_#{i}"].strip
-      player = Player.find_or_create_by(gamertag: player_name)
-
-      player_characters = parsed_title["player_#{i}_characters"].strip.split(',').map(&:strip)
-      match_player = MatchPlayer.find_or_create_by(match_id: match.id, player_id: player.id, team_id: i)
-      player_characters.each do |character_name|
-        character = Character.find_by_name(character_name)
-        match_player.add_character(character) if character
-      end
-    end
+    regex.parse(id)
   end
 end

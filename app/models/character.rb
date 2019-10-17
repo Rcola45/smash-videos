@@ -1,6 +1,8 @@
 class Character < ApplicationRecord
   has_and_belongs_to_many :games
   has_and_belongs_to_many :match_players
+  has_many :matches, through: :match_players
+  has_many :videos, through: :matches
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 
