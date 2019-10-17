@@ -1,1 +1,9 @@
-h1 = @text
+- @videos.each do |video|
+  .video
+    = video.iframe.html_safe
+    h3 = video.source.name
+    .video-info
+      = video.video_player_info
+      br
+      = video.description
+  hr

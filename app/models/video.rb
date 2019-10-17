@@ -1,8 +1,11 @@
 class Video < ApplicationRecord
   belongs_to :source
   has_one :description, dependent: :destroy
-  has_one :match
+  has_one :match, dependent: :destroy
   has_one :match_type, through: :match
+  has_many :match_players, through: :match
+  has_many :players, through: :match
+  has_many :characters, through: :match
 
   scope :ssbu, -> { where('lower(title) LIKE ? OR lower(title) LIKE ? OR lower(title) LIKE ?', '%smash ultimate%', '%ssbu%', '%bros ultimate%') } #All SSBU videos
 
@@ -20,6 +23,16 @@ class Video < ApplicationRecord
 
   def iframe
     "<iframe width='560' height='315' src='#{embedded_url}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"
+  end
+
+  def video_player_info
+    info_string = ''
+    match_players.each_with_index do |match_player, i|
+      info_string << match_player.player.name_with_sponsor
+      info_string << " (#{match_player.characters.pluck(:name).join(',')})"
+      (info_string << ' VS ') if i.zero?
+    end
+    info_string
   end
 
   def parse_title

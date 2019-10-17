@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   protect_from_forgery except: [:youtube_callback]
 
   def index
-    @text = 'Main Video Page'
+    @videos = Video.ssbu.preload(:source, :description, match: [:match_players, :players, :characters]).last(10)
   end
 
   def youtube_callback
