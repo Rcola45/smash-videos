@@ -5,9 +5,9 @@ class TitleRegex < ApplicationRecord
   belongs_to :match_type
   belongs_to :game
 
-  def regex
+  def regex_string
     # Convert url_regex string to regex object
-    Regexp.new regex_string
+    Regexp.new(super, Regexp::IGNORECASE)
   end
 
   def parse(video_id)
