@@ -18,5 +18,7 @@ module Smash
     # the framework and any gems in your application.
 
     Google::Apis::RequestOptions.default.retries = 3
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
