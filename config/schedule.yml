@@ -2,4 +2,5 @@ video_collection_scheduler_job:
   cron: "0 0 * * *"
   class: "VideoCollectionSchedulerJob"
   queue: 'video_collection'
-  active_job: false
+  active_job: true
+  description: 'Schedules video collection from YoutubeAPI for all active sources in the database.'
