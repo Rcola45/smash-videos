@@ -31,7 +31,7 @@ class TitleRegex < ApplicationRecord
     [1, 2].each do |index|
       player_name = clean_whitespace(attrs["player_#{index}"])
       character_list = attrs["player_#{index}_characters"].split(',').map(&:strip)
-
+      character_list = attrs["player_#{index}_characters"].split('/').map(&:strip) unless character_list&.any?
       player_name, sponsor_name = extract_sponsor(player_name)
       player = Player.find_or_create_by(gamertag: player_name)
       player.update(sponsor: sponsor_name) if sponsor_name
