@@ -2,4 +2,4 @@ video_collection_scheduler_job:
   cron: "0 0 * * *"
   class: "VideoCollectionSchedulerJob"
   queue: 'video_collection'
-  active_job: true
+  active_job: false
