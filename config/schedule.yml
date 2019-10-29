@@ -1,5 +1,5 @@
-subscribe_to_channels_job:
-  cron: "0 0 * * 0"
-  class: "SubscribeToChannelsJob"
+video_collection_scheduler_job:
+  cron: "0 0 * * *"
+  class: "VideoCollectionSchedulerJob"
   queue: 'video_collection'
   active_job: true

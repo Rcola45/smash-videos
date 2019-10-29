@@ -5,7 +5,7 @@ class Character < ApplicationRecord
   has_many :players, through: :matches
   has_many :videos, through: :matches
 
-  validates :name, presence: true, uniqueness: {case_sensitive: false}
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   def self.find_by_name(character_name)
     found = Character.where('lower(name) = ?', character_name.downcase).first
@@ -17,5 +17,6 @@ class Character < ApplicationRecord
     return alias_found if alias_found
 
     # Try your best
+    Character.where('lower(name) LIKE ?', "%#{character_name}%").first
   end
 end

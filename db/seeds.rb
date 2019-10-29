@@ -142,7 +142,8 @@ character_names = [
 ]
 
 character_names.each do |character_name|
-  ssbu.characters << Character.find_or_create_by(name: character_name)
+  character = Character.find_or_create_by(name: character_name)
+  ssbu.characters << character unless ssbu.characters.include?(character)
 end
 
 puts 'Finished creating Characters.'

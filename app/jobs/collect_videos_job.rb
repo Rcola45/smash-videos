@@ -20,7 +20,7 @@ class CollectVideosJob < ApplicationJob
     end
     total_videos_created = process_items(items, source_id)
     source.update(last_collected: DateTime.current)
-    puts "Collected #{total_videos_created} videos from #{source.name}"
+    puts "Collected #{total_videos_created} new videos from #{source.name}"
   end
 
   def process_items(items, source_id)
