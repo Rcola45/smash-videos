@@ -16,7 +16,7 @@ class TitleRegex < ApplicationRecord
 
     match = video.match
     string = video.title
-    parsed_string = string.match(regex)
+    parsed_string = string.match(regex_string)
     # parsed_string ||= match_basic(string)
     if parsed_string.nil?
       puts "Could not parse string for tr:<#{id}> and vid: #{video_id}"
