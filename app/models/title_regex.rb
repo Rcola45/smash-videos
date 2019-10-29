@@ -15,6 +15,10 @@ class TitleRegex < ApplicationRecord
     return if video.nil?
 
     match = video.match
+    if match.nil?
+      puts "Nil match for vid: #{video_id}"
+      return
+    end
     string = video.title
     parsed_string = string.match(regex_string)
     # parsed_string ||= match_basic(string)
