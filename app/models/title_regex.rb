@@ -35,7 +35,9 @@ class TitleRegex < ApplicationRecord
     [1, 2].each do |index|
       player_name = clean_whitespace(attrs["player_#{index}"])
       character_list = attrs["player_#{index}_characters"].split(',').map(&:strip)
-      character_list = attrs["player_#{index}_characters"].split('/').map(&:strip) unless character_list&.any?
+      character_list_slash = attrs["player_#{index}_characters"].split('/').map(&:strip)
+      # Dealing with names like 'character1/character2' that don't use commas
+      character_list = character_list_slash if character_list_slash.size > character_list.size
       player_name, sponsor_name = extract_sponsor(player_name)
       player = Player.find_or_create_by(gamertag: player_name)
       player.update(sponsor: sponsor_name) if sponsor_name
