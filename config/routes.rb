@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   match 'youtube_callback', to: 'videos#youtube_callback', via: [:post, :get], defaults: {format: :json}
   root to: 'characters#index'
 
+  match '/admin', to: 'application#admin', via: :get
+
   resources :characters, only: [:index, :show]
 end
