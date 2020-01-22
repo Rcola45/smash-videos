@@ -1,5 +1,5 @@
 module TextHelper
-  # Cleans filename and returns it with
+  # Cleans filename and returns it
   def clean_filename(filename)
     return text if filename.empty?
 
