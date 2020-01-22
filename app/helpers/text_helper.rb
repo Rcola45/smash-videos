@@ -1,22 +1,24 @@
 module TextHelper
-  def clean_filename(text)
-    return text if text.empty?
+  # Cleans filename and returns it with
+  def clean_filename(filename)
+    return text if filename.empty?
 
-    transliterate(remove_extension(text.gsub(/[ \.]/, ' ': '_', '.': '')))
+    fname, extension = split_extension(filename)
+    "#{transliterate(fname.gsub(' ', '_').gsub('.', ''))}#{extension.presence}"
   end
 
-  def contains_extension?(filename)
-    filename.match(extension_regex)
+  # Removes filename extension from inputted string
+  def split_extension(filename)
+    fname, *extension = filename.rpartition('.')
+    [fname, extension.join]
   end
 
-  def remove_extension(filename)
-    filename.gsub(extension_regex, '')
-  end
-
+  # Regex for filename extentions
   def extension_regex
-    /\.\s{1,6}$/
+    /\.\S{1,6}$/
   end
 
+  # Removes accents from text
   def transliterate(text)
     I18n.transliterate(text)
   end

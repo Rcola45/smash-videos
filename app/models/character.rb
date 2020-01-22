@@ -13,7 +13,8 @@ class Character < ApplicationRecord
   end
 
   def image_filename
-    "#{clean_filename(name.downcase.gsub(' ', '_'))}.png"
+    filename = "#{name.downcase}.png"
+    clean_filename(filename)
   end
 
   def self.find_by_name(character_name)
