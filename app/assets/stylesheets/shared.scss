@@ -23,7 +23,10 @@
 }
 
 .card__icon {
-  
+  img {
+    width: 64px;
+    height: 64px;
+  }
 }
 .card__info {
   h2 {

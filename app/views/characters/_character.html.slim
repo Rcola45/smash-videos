@@ -1,7 +1,7 @@
 = link_to character
   .card.card--small.character.grid-item
     .card__icon
-      = image_tag('ridley.png', alt: "#{character.name} Icon")
+      = image_tag(character.image_url, alt: "#{character.name} Icon")
     .card__info
       h2.row
         = character.name
