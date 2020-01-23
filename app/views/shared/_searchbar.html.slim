@@ -1,0 +1,11 @@
+.div class="search-bar input-group mb-3 #{('input-group-' + local_assigns[:size]) if local_assigns[:size]}" id="#{local_assigns[:id] }"
+  - if local_assigns[:prepend_text]
+    .div class="input-group-prepend"
+      .span class="input-group-text" id="inputGroup-sizing-#{local_assigns[:size] || 'default'}"
+        = local_assigns[:prepend_text] || ''
+  input[type="text" 
+        class="form-control" 
+        aria-label="Default" 
+        aria-describedby="inputGroup-sizing-#{local_assigns[:size] || 'default'}"
+        data-callback-func='characterSearchCallback'
+        data-search-type='live']

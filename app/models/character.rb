@@ -8,6 +8,8 @@ class Character < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
+  scope :search, ->(searchTerm) { where('name ILIKE ?', "%#{searchTerm}%") if searchTerm }
+
   def image_url
     "character_icons/#{image_filename}"
   end

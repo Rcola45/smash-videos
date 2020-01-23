@@ -17,5 +17,6 @@ Rails.application.routes.draw do
 
   match '/admin', to: 'application#admin', via: :get
 
+  match '/characters', to: 'characters#index', via: :post
   resources :characters, only: [:index, :show]
 end
