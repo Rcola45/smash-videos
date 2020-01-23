@@ -32,5 +32,8 @@
 # Redis dump file
 dump.rdb
 
+# Mac stuff
+.DS_Store
+
 # My Shit
 logs.txt
