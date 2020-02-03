@@ -5,7 +5,7 @@ class CollectVideosJob < ApplicationJob
     # Querys a specific youtube channel for Smash Ultimate videos
     source = Source.find(source_id)
     channel_id = source.channel_id
-    last_video_date = last_source_video_date(source_id)
+    last_video_date = last_source_video_date(source)
     service = youtube_service
     part = 'snippet, id'
 
@@ -54,8 +54,7 @@ class CollectVideosJob < ApplicationJob
     videos_created
   end
 
-  def last_source_video_date(source_id)
-    source = Source.find(source_id)
+  def last_source_video_date(source)
     last_video_date = source.videos.order(:upload_date).last&.upload_date&.rfc3339&.to_s
     smash_release_date = DateTime.parse('December 8, 2018').rfc3339.to_s
     last_video_date || smash_release_date
