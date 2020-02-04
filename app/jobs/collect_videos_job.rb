@@ -33,7 +33,7 @@ class CollectVideosJob < ApplicationJob
       video_id = item.id&.video_id
 
       # Return if info missing
-      next if !title || !published_at || !description || !video_id
+      next if !title || !published_at || !video_id
 
       # Return if video already in system
       video = Video.find_by(video_id: video_id)
@@ -47,7 +47,7 @@ class CollectVideosJob < ApplicationJob
         source_id: source_id
       )
       if video.save
-        video.create_description(value: description)
+        video.create_description(value: description) if description
         videos_created += 1
       end
     end

@@ -25,16 +25,6 @@ class Video < ApplicationRecord
     "<iframe width='560' height='315' src='#{embedded_url}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"
   end
 
-  def video_player_info
-    info_string = ''
-    match_players.each_with_index do |match_player, i|
-      info_string << match_player.player.name_with_sponsor
-      info_string << " (#{match_player.characters.pluck(:name).join(',')})"
-      (info_string << ' VS ') if i.zero?
-    end
-    info_string
-  end
-
   def parse_title
     unless match
       self.match = Match.create(video_id: self.id, match_type: MatchType.find_by(name: 'Singles'))

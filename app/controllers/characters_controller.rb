@@ -16,7 +16,7 @@ class CharactersController < ApplicationController
   end
 
   def show
-    @videos = @character.videos.last(10)
+    @videos = @character.videos.includes(:source, :description, match: [:characters, :players]).last(10)
   end
 
   private
